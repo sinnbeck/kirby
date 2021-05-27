@@ -172,6 +172,37 @@ class FileActionsTest extends TestCase
         $this->assertFileExists($parent->root() . '/test.md');
     }
 
+    public function testCreateWithoutParent()
+    {
+        $this->expectException('Kirby\Exception\InvalidArgumentException');
+        $this->expectExceptionMessage('Please provide the "source" and "parent" props for the File');
+
+        $source = $this->fixtures . '/source.md';
+
+        // create the dummy source
+        F::write($source, '# Test');
+
+        $result = File::create([
+            'filename' => 'test.md',
+            'source'   => $source
+        ]);
+
+    }
+
+    /**
+     * @dataProvider parentProvider
+     */
+    public function testCreateWithoutSource($parent)
+    {
+        $this->expectException('Kirby\Exception\InvalidArgumentException');
+        $this->expectExceptionMessage('Please provide the "source" and "parent" props for the File');
+
+        File::create([
+            'filename' => 'test.md',
+            'parent'   => $parent
+        ]);
+    }
+
     /**
      * @dataProvider parentProvider
      */

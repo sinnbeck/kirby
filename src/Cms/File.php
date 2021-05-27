@@ -512,10 +512,10 @@ class File extends ModelWithContent
     /**
      * Sets the parent model object
      *
-     * @param \Kirby\Cms\Model|null $parent
+     * @param \Kirby\Cms\Model $parent
      * @return $this
      */
-    protected function setParent(Model $parent = null)
+    protected function setParent(Model $parent)
     {
         $this->parent = $parent;
         return $this;
